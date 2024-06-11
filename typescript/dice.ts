@@ -96,8 +96,13 @@ function rollDie():void{
 
 function holdDie():void{
     //get the current turn total
+     let currTotal = document.getElementById("total") as HTMLInputElement;
+
     //determine who the current player is
+    let currPlayer = document.getElementById("current") as HTMLInputElement;
+    
     //add the current turn total to the player's total score
+
 
     //reset the turn total to 0
 

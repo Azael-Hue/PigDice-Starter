@@ -54,5 +54,7 @@ function rollDie() {
     totalText.value = currTotal.toString();
 }
 function holdDie() {
+    let currTotal = document.getElementById("total");
+    let currPlayer = document.getElementById("current");
     changePlayers();
 }
