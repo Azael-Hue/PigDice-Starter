@@ -1,6 +1,6 @@
 function generateRandomValue(minValue, maxValue) {
     var random = Math.random();
-    random = Math.floor(random * 6) + 1;
+    random = Math.floor(random * maxValue) + minValue;
     return random;
 }
 function changePlayers() {
@@ -40,6 +40,18 @@ function createNewGame() {
 }
 function rollDie() {
     let currTotal = parseInt(document.getElementById("total").value);
+    let diceRoll = generateRandomValue(1, 6);
+    if (diceRoll == 1) {
+        changePlayers();
+        currTotal = 0;
+    }
+    else {
+        currTotal += diceRoll;
+    }
+    let dieRollText = document.getElementById("die");
+    dieRollText.value = diceRoll.toString();
+    let totalText = document.getElementById("total");
+    totalText.value = currTotal.toString();
 }
 function holdDie() {
     changePlayers();

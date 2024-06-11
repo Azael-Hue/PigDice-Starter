@@ -1,11 +1,11 @@
 
-// This function will simulate a D6 die roll when called,
+// This function will simulate a die roll when called,
 function generateRandomValue(minValue:number, maxValue:number):number{
     var random = Math.random();
     
     //TODO: use random to generate a number between min and max
-    // returns a random integer from 1 to 6
-    random = Math.floor(random * 6) + 1;
+    // returns a random integer
+    random = Math.floor(random * maxValue) + minValue;
 
     return random;
 }
@@ -69,16 +69,29 @@ function rollDie():void{
     let currTotal = parseInt((<HTMLInputElement>document.getElementById("total")).value);
     
     //roll the die and get a random value 1 - 6 (use generateRandomValue function)
+    let diceRoll = generateRandomValue(1, 6);    
 
     //if the roll is 1
     //  change players
     //  set current total to 0
+    if (diceRoll == 1){
+        changePlayers();
+        currTotal = 0;
+    }
     
     //if the roll is greater than 1
     //  add roll value to current total
+    else{
+        currTotal += diceRoll;
+    }
 
     //set the die roll to value player rolled
+    let dieRollText = document.getElementById("die") as HTMLInputElement;
+    dieRollText.value = diceRoll.toString();
+
     //display current total on form
+    let totalText = document.getElementById("total") as HTMLInputElement;
+    totalText.value = currTotal.toString();
 }
 
 function holdDie():void{
