@@ -55,35 +55,43 @@ function rollDie() {
     dieRollText.value = diceRoll.toString();
     let totalText = document.getElementById("total");
     totalText.value = currTotal.toString();
+    let currPlayer = document.getElementById("current").innerText;
+    if (currTotal >= 100) {
+        alert(currPlayer + " Wins");
+        createNewGame();
+    }
 }
 function holdDie() {
     let currTotal = parseInt(document.getElementById("total").value);
-    if (currTotal == 0) {
-        changePlayers();
+    let currentPlayerName = document.getElementById("current");
+    let player1Name = document.getElementById("player1").value;
+    let player2Name = document.getElementById("player2").value;
+    let p1Score = parseInt(document.getElementById("score1").value);
+    let p2Score = parseInt(document.getElementById("score2").value);
+    let p1ScoreText = document.getElementById("score1");
+    let p2ScoreText = document.getElementById("score2");
+    if (currentPlayerName.innerHTML == player1Name) {
+        p1Score = p1Score + currTotal;
+        p1ScoreText.value = p1Score.toString();
     }
-    else {
-        let currentPlayerName = document.getElementById("current");
-        let player1Name = document.getElementById("player1").value;
-        let player2Name = document.getElementById("player2").value;
-        if (currentPlayerName.innerHTML == player1Name) {
-            let p1Score = parseInt(document.getElementById("score1").value);
-            let p1ScoreText = document.getElementById("score1");
-            p1Score = p1Score + currTotal;
-            p1ScoreText.value = p1Score.toString();
-        }
-        else if (currentPlayerName.innerHTML == player2Name) {
-            let p2Score = parseInt(document.getElementById("score2").value);
-            let p2ScoreText = document.getElementById("score2");
-            p2Score = p2Score + currTotal;
-            p2ScoreText.value = p2Score.toString();
-        }
-        clearDieScoreValue();
-        changePlayers();
+    else if (currentPlayerName.innerHTML == player2Name) {
+        p2Score = p2Score + currTotal;
+        p2ScoreText.value = p2Score.toString();
     }
+    if (p1Score >= 100) {
+        alert(player1Name + " Wins");
+        createNewGame();
+    }
+    else if (p2Score >= 100) {
+        alert(player2Name + " Wins");
+        createNewGame();
+    }
+    clearDieScoreValue();
+    changePlayers();
 }
 function clearDieScoreValue() {
     let dieText = document.getElementById("die");
-    dieText.value = "";
+    dieText.value = "0";
     let totalText = document.getElementById("total");
-    totalText.value = "";
+    totalText.value = "0";
 }

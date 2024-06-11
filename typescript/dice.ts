@@ -96,6 +96,14 @@ function rollDie():void{
     //display current total on form
     let totalText = document.getElementById("total") as HTMLInputElement;
     totalText.value = currTotal.toString();
+
+    // If the current total is 100, the current player wins
+    // and reset the game
+    let currPlayer = (<HTMLElement>document.getElementById("current")).innerText;
+    if (currTotal >= 100){
+        alert(currPlayer + " Wins");
+        createNewGame();
+    }
 }
 
 function holdDie():void{
@@ -103,11 +111,6 @@ function holdDie():void{
     //get the current turn total
     let currTotal = parseInt((<HTMLInputElement>document.getElementById("total")).value);
 
-    if (currTotal == 0){
-        changePlayers();
-        
-    }
-    else{
         //determine who the current player is
         let currentPlayerName = (<HTMLElement>document.getElementById("current"));
         let player1Name : string = (<HTMLInputElement>document.getElementById("player1")).value;
@@ -115,17 +118,28 @@ function holdDie():void{
         
         //add the current turn total to the player's total score
     
+        let p1Score = parseInt((<HTMLInputElement>document.getElementById("score1")).value);
+        let p2Score = parseInt((<HTMLInputElement>document.getElementById("score2")).value);
+        let p1ScoreText = document.getElementById("score1") as HTMLInputElement;
+        let p2ScoreText = document.getElementById("score2") as HTMLInputElement;
+
         if (currentPlayerName.innerHTML == player1Name){
-            let p1Score = parseInt((<HTMLInputElement>document.getElementById("score1")).value);
-            let p1ScoreText = document.getElementById("score1") as HTMLInputElement;
             p1Score = p1Score + currTotal;
             p1ScoreText.value = p1Score.toString();
         }
         else if (currentPlayerName.innerHTML == player2Name){
-            let p2Score = parseInt((<HTMLInputElement>document.getElementById("score2")).value);
-            let p2ScoreText = document.getElementById("score2") as HTMLInputElement;
             p2Score = p2Score + currTotal;
             p2ScoreText.value = p2Score.toString();
+        }
+
+        // Check if the current player has reached a score of 100 to win
+        if (p1Score >= 100){
+            alert(player1Name + " Wins");
+            createNewGame();
+        }
+        else if (p2Score >= 100){
+            alert(player2Name + " Wins");
+            createNewGame();
         }
     
         //reset the turn total to 0
@@ -133,13 +147,13 @@ function holdDie():void{
     
         //change players
         changePlayers();
-    }
 }
 
+// this function will clear the die and total values
 function clearDieScoreValue():void{
     let dieText = document.getElementById("die") as HTMLInputElement;
-    dieText.value = "";
+    dieText.value = "0";
 
     let totalText = document.getElementById("total") as HTMLInputElement;
-    totalText.value = "";
+    totalText.value = "0";
 }
