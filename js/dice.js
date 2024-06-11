@@ -7,14 +7,11 @@ function changePlayers() {
     let currentPlayerName = document.getElementById("current");
     let player1Name = document.getElementById("player1").value;
     let player2Name = document.getElementById("player2").value;
-    console.log(currentPlayerName + " LOG1 ");
-    if (currentPlayerName.innerText === player1Name) {
+    if (currentPlayerName.innerText == player1Name) {
         currentPlayerName.innerHTML = player2Name;
-        console.log(currentPlayerName.innerHTML + " LOG A ");
     }
-    else if (currentPlayerName.innerText === player2Name) {
+    else if (currentPlayerName.innerText == player2Name) {
         currentPlayerName.innerHTML = player1Name;
-        console.log(currentPlayerName.innerHTML + " LOG B ");
     }
 }
 window.onload = function () {
