@@ -1,12 +1,18 @@
+
+// This function will simulate a D6 die roll when called,
 function generateRandomValue(minValue:number, maxValue:number):number{
     var random = Math.random();
     
     //TODO: use random to generate a number between min and max
+    // returns a random integer from 1 to 6
+    random = Math.floor(random * 6) + 1;
 
     return random;
 }
 
-
+// When this function is called, it will change
+// the current player name to the next player
+// using else if statements to check who is currently playing
 function changePlayers():void{
     let currentPlayerName = (<HTMLElement>document.getElementById("current")).innerText;
     let player1Name = (<HTMLInputElement>document.getElementById("player1")).value;
@@ -14,6 +20,12 @@ function changePlayers():void{
 
     //swap from player to player by comparing current name to player names
     //set currentPlayerName to the next player
+    if(currentPlayerName == player1Name){
+        currentPlayerName = player2Name;
+    }
+    else{
+        currentPlayerName = player1Name;
+    }
 }
 
 window.onload = function(){
