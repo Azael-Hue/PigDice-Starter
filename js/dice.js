@@ -4,14 +4,17 @@ function generateRandomValue(minValue, maxValue) {
     return random;
 }
 function changePlayers() {
-    let currentPlayerName = document.getElementById("current").innerText;
+    let currentPlayerName = document.getElementById("current");
     let player1Name = document.getElementById("player1").value;
     let player2Name = document.getElementById("player2").value;
-    if (currentPlayerName == player1Name) {
-        currentPlayerName = player2Name;
+    console.log(currentPlayerName + " LOG1 ");
+    if (currentPlayerName.innerText === player1Name) {
+        currentPlayerName.innerHTML = player2Name;
+        console.log(currentPlayerName.innerHTML + " LOG A ");
     }
-    else {
-        currentPlayerName = player1Name;
+    else if (currentPlayerName.innerText === player2Name) {
+        currentPlayerName.innerHTML = player1Name;
+        console.log(currentPlayerName.innerHTML + " LOG B ");
     }
 }
 window.onload = function () {
@@ -35,7 +38,7 @@ function createNewGame() {
         document.getElementById("total").value = "0";
         document.getElementById("player1").setAttribute("disabled", "disabled");
         document.getElementById("player2").setAttribute("disabled", "disabled");
-        changePlayers();
+        document.getElementById("current").innerText = player1Name;
     }
 }
 function rollDie() {
@@ -54,7 +57,33 @@ function rollDie() {
     totalText.value = currTotal.toString();
 }
 function holdDie() {
-    let currTotal = document.getElementById("total");
-    let currPlayer = document.getElementById("current");
-    changePlayers();
+    let currTotal = parseInt(document.getElementById("total").value);
+    if (currTotal == 0) {
+        changePlayers();
+    }
+    else {
+        let currentPlayerName = document.getElementById("current");
+        let player1Name = document.getElementById("player1").value;
+        let player2Name = document.getElementById("player2").value;
+        if (currentPlayerName.innerHTML == player1Name) {
+            let p1Score = parseInt(document.getElementById("score1").value);
+            let p1ScoreText = document.getElementById("score1");
+            p1Score = p1Score + currTotal;
+            p1ScoreText.value = p1Score.toString();
+        }
+        else if (currentPlayerName.innerHTML == player2Name) {
+            let p2Score = parseInt(document.getElementById("score2").value);
+            let p2ScoreText = document.getElementById("score2");
+            p2Score = p2Score + currTotal;
+            p2ScoreText.value = p2Score.toString();
+        }
+        clearDieScoreValue();
+        changePlayers();
+    }
+}
+function clearDieScoreValue() {
+    let dieText = document.getElementById("die");
+    dieText.value = "";
+    let totalText = document.getElementById("total");
+    totalText.value = "";
 }
